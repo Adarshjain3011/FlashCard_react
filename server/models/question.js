@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const Category = require('./category'); // Assuming it's in the same directory
- 
 
 const Question = sequelize.define('Question', {
     questionName: {
@@ -11,8 +10,8 @@ const Question = sequelize.define('Question', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    option: {
-        type: DataTypes.STRING,
+    options: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
     },
 });
