@@ -9,7 +9,7 @@ const FlashCard = () => {
 
     <div>
 
-        <FlashCardPage />
+        <FlashCardPage question={"4+4 what it will be "} options={["8","5","7","3"]}/>
 
     </div>
   )
