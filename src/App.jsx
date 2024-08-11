@@ -5,7 +5,7 @@ import { Route, Routes } from 'react-router-dom';
 import FlashCard from "./FlashCard";
 
 function App() {
-  const [count, setCount] = useState(0)
+ 
 
   return (
 

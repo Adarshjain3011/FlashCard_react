@@ -7,7 +7,7 @@ const Question = ({text}) => {
 
     <div>
 
-        <p className='text-center text-2xl'>{text}</p>
+        <p className=' text-2xl'>{text}</p>
 
     </div>
   )
