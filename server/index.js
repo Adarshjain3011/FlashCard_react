@@ -5,6 +5,8 @@ const app = express();
 
 const cors = require('cors');
 
+require('dotenv').config();
+
 const sequelize = require('./config/db'); // Import the Sequelize instance
 
 const appRoutes = require("./routes/route");
