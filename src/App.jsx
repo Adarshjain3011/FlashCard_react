@@ -8,8 +8,6 @@ import axios from 'axios';
 
 function App() {
 
-  
-
   useEffect(()=>{
 
     async function createUser() {

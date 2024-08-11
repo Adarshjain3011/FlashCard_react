@@ -1,23 +1,19 @@
-const mysql = require('mysql');
+// db.js
+const { Sequelize } = require('sequelize');
 
-async function dbConnect() {
-    try {
-        const db = mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: '',
-            database: 'sample'
-        });
+// Create a new Sequelize instance
+const sequelize = new Sequelize('sample', 'root', '', {
+    host: 'localhost',
+    dialect: 'mysql',
+});
 
-        db.connect((error) => {
-            if (error) throw error;
-            console.log("MySQL is connected");
-        });
+// Test the connection
+sequelize.authenticate()
+    .then(() => {
+        console.log('Connection has been established successfully.');
+    })
+    .catch(error => {
+        console.error('Unable to connect to the database:', error);
+    });
 
-    } catch (error) {
-        console.error('Failed to connect to the database', error);
-        process.exit(1);
-    }
-}
-
-module.exports = dbConnect; // CommonJS syntax for exporting
+module.exports = sequelize; // Export the Sequelize instance
