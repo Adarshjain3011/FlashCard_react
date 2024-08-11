@@ -1,18 +1,18 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
 
-      <h1>hellow world </h1>
-      
-    </>
+    <div className='min-h-screen w-screen bg-red-700'>
+
+
+    </div>
   )
 }
 
 export default App
+
+
