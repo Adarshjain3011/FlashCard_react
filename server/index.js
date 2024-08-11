@@ -7,9 +7,11 @@ const cors = require('cors');
 
 const mysql = require('mysql');
 
+const appRoutes = require("./routes/route");
+
+const dbConnect = require('./config/db'); // Change import to require
+
 const port = process.env.PORT || 4000;
-
-
 
 
 app.use(express.json());
@@ -23,6 +25,11 @@ app.use(cors({
 
 
 // database connection  
+
+dbConnect();
+
+app.use("/api",appRoutes);
+
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');
