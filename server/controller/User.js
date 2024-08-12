@@ -59,6 +59,9 @@ async function signup(req, res) {
 }
 
 
+console.log(process.env.JWT_SECRET);
+
+
 
 async function login(req, res) {
     try {

@@ -1,36 +1,25 @@
-
 const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config({ path: '.env.local' }); // Ensure this is at the top
 
 const app = express();
 
-const cors = require('cors');
-
-require('dotenv').config();
-
 const sequelize = require('./config/db'); // Import the Sequelize instance
+const appRoutes = require('./routes/route');
 
-const appRoutes = require("./routes/route");
-const { config } = require('dotenv');
+const port = process.env.PORT || 4000 ; // Explicit declaration
 
-
-
-const port = 4000;
-
-console.log("port is ",port);
-
+console.log("port is ", port); // Output the port being used
 
 app.use(express.json());
 
 app.use(cors({
-
-    origin: 'http://localhost:3000', // allow requests from this origin
-
+    origin: 'http://localhost:3000', // Allow requests from this origin
 }));
 
-
-
-// database connection  
-
+// Database connection  
 sequelize.sync()
     .then(() => {
         app.listen(port, () => {
@@ -41,10 +30,8 @@ sequelize.sync()
         console.error('Failed to sync database:', error);
     });
 
-app.use("/api",appRoutes);
-
+app.use("/api", appRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
-
