@@ -3,9 +3,18 @@ const express = require('express');
 
 const {signup,login,getUser} = require("../controller/User");
 
-const {createCategory, getCategories, getCategoryById, updateCategory, deleteCategory} = require("../controller/Category");
+const {createCategory, getAllCategories, getCategoryById, updateCategory, deleteCategory} = require("../controller/Category");
 
-const {createQuestion, getQuestions, getQuestionById, updateQuestion, deleteQuestion} = require("../controller/Question");
+const { 
+
+    createQuestion,
+    updateQuestion,
+    getQuestionById,
+    getAllQuestion,
+    getAllQuestionOfSpecificCategory,
+    deleteQuestion
+
+} = require("../controller/Question");
 
 
 
@@ -16,7 +25,7 @@ const router = express.Router();
 
 
 
-router.post("/signup",singup);
+router.post("/signup",signup);
 
 router.post("/login",login);
 
@@ -30,7 +39,7 @@ router.get("/user",getUser);
 
 router.post("/category",createCategory);
 
-router.get("/categories",getCategories);
+router.get("/getAllCategories",getAllCategories);
 
 router.get("/category/:id",getCategoryById);
 
@@ -43,15 +52,17 @@ router.delete("/category/:id",deleteCategory);
 // Question routes 
 
 
-router.post("/question",createQuestion);
+router.post("/createQuestion",createQuestion);
 
-router.get("/questions",getQuestions);
+router.get("/getAllQuestion",getAllQuestion);
 
-router.get("/question/:id",getQuestionById);
+router.get("/getAllQuestionOfSpecificCategory/:categoryId",getAllQuestionOfSpecificCategory);
 
-router.put("/question/:id",updateQuestion);
+router.get("/getQuestionById/:id",getQuestionById);
 
-router.delete("/question/:id",deleteQuestion);
+router.put("/updateQuestion/:id",updateQuestion);
+
+router.delete("/deleteQuestion/:id",deleteQuestion);
 
 
 

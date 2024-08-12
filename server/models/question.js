@@ -1,6 +1,8 @@
 const { DataTypes } = require('sequelize');
 const Category = require('./category'); // Assuming it's in the same directory
 
+const sequelize = require('../config/db')
+
 const Question = sequelize.define('Question', {
     questionName: {
         type: DataTypes.STRING,

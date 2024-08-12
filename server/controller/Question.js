@@ -1,4 +1,5 @@
-import { data } from "autoprefixer";
+const Category = require("../models/category");
+
 
 async function createQuestion(req, res) {
 
@@ -153,7 +154,7 @@ async function updateQuestion(req, res) {
 
 
 
-async function getQuestion(req, res) {
+async function getQuestionById(req, res) {
     
     try {
         
@@ -189,6 +190,34 @@ async function getQuestion(req, res) {
             message: error.message
         });
         
+    }
+}
+
+
+async function getAllQuestion(req,res){
+
+
+    try{
+        
+        const questions = await Question.findAll({});
+
+        return res.status(200).json({
+                
+            success: true,
+            data: questions,
+            message: "all questions fetched successfully"
+            
+        })
+
+    }catch(error){
+
+        return res.status(500).json({
+                
+            success: false,
+            data: null,
+            message: "all questions not found"
+            
+        })
     }
 }
 
@@ -243,12 +272,76 @@ async function deleteQuestion(req, res) {
     }
 }
 
+async function getAllQuestionOfSpecificCategory(req,res){
+
+    try{
+
+        const { categoryId } = req.params;
+
+        if (!categoryId) {
+
+            return res.status(400).json({
+
+                success: false,
+                data: null,
+                message: "Category ID is not provided"
+
+            })
+        }
+
+        const findCategory = await Category.findByPk(categoryId);
+
+        if (!findCategory) {
+
+            return res.status(404).json({
+
+                success: false,
+                data: null,
+                message: "Category does not exist"
+
+            })
+        }
+
+        const questions = await Question.findAll({
+
+            where: {
+                categoryId
+            }
+        });
+
+        return res.status(200).json({
+
+            success: true,
+            data: questions,
+            message: "questions fetched successfully"
+
+        })
+
+    }catch(error){
+
+        console.error("Error:", error.message);
+        return res.status(500).json({
+
+            success: false,
+            data: null,
+            message: "all questions not found",
+            erorr:error.message
+
+        })
+    }
+}
+
 
 
 module.exports = {
 
     createQuestion,
     updateQuestion,
-    getQuestion,
+    getQuestionById,
+    getAllQuestion,
+    getAllQuestionOfSpecificCategory,
     deleteQuestion
+
 };
+
+

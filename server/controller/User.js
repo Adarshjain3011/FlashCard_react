@@ -2,6 +2,9 @@
 
 require('dotenv').config();
 
+const jwt = require('jsonwebtoken');
+const User = require('../models/user'); // Adjust the path as needed
+
 async function signup(req, res) {
     try {
         const { name, email, password, role } = req.body;
@@ -56,24 +59,16 @@ async function signup(req, res) {
 
 
 async function login(req, res) {
-
     try {
-
         const { email, password } = req.body;
 
         if (!email || !password) {
-
             return res.status(400).json({
-
                 success: false,
                 data: null,
                 message: "All fields are required"
-
             });
         }
-
-
-        // Check if the user already exists by email
 
         const findUser = await User.findOne({ where: { email } });
 
@@ -81,11 +76,9 @@ async function login(req, res) {
             return res.status(400).json({
                 success: false,
                 data: null,
-                message: " no User exists  with this email"
+                message: "No user exists with this email"
             });
         }
-
-        // Compare the provided password with the hashed password from the database
 
         const match = await bcrypt.compare(password, findUser.password);
 
@@ -97,27 +90,19 @@ async function login(req, res) {
             });
         }
 
-        // Create a JSON Web Token (JWT) with the user's ID
-
         const token = jwt.sign({ id: findUser.id }, process.env.JWT_SECRET, { expiresIn: '8h' });
 
-        
-        const response = res.status(200).json({
-            message: "Authentication successful",
-            status: 200,
-        });
-
-        response.cookies.set("token", token, {
+        res.cookie("token", token, {
             httpOnly: true,
         });
 
-        return response;
-
+        return res.status(200).json({
+            success: true,
+            message: "Authentication successful",
+        });
 
     } catch (error) {
-
         console.error("Error:", error.message);
-
         return res.status(500).json({
             success: false,
             data: null,
@@ -125,6 +110,7 @@ async function login(req, res) {
         });
     }
 }
+
 
 
 
