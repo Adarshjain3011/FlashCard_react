@@ -124,7 +124,7 @@ async function getUser(req, res) {
     try{
 
 
-        const {userId} = req.params;
+        const userId = req.user.id;
 
         if(! userId){
 
@@ -137,7 +137,7 @@ async function getUser(req, res) {
             })
         }
 
-        const findUser = await User.findOne({ where: { email } });
+        const findUser = await User.findByPk(userId);
 
         if (!findUser) {
             return res.status(400).json({
