@@ -1,4 +1,4 @@
-const Category = require('./category'); // Assuming Category model is defined in category.js
+const Category = require('../models/category'); // Assuming Category model is defined in category.js
 
 async function createCategory(req, res) {
     try {
