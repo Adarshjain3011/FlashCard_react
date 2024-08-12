@@ -65,8 +65,10 @@ const Signup = () => {
                     name='password'
                     onChange={changeHandler}
                 />
+                
 
                 <button type='submit'> Click me </button>
+
             </form>
         </div>
     )

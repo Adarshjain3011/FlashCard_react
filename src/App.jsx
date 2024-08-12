@@ -8,6 +8,8 @@ import axios from 'axios';
 
 import Signup from './Signup';
 
+import Login from "../"
+
 function App() {
 
 
@@ -18,11 +20,14 @@ function App() {
 
       <Routes>
 
-        <Route path='/flashcard' element={<FlashCard/>}></Route>
+        <Route path='/flashcard' element={<FlashCard />}></Route>
 
-        <Route path='/signup' element={<Signup/>}></Route>
+        <Route path='/signup' element={<Signup />}></Route>
+        <Route path='/login' element={< Login/>}></Route>
 
       </Routes>
+
+      <h1>Welcome to home page </h1>
 
     </div>
   )
