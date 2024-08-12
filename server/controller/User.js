@@ -92,7 +92,7 @@ async function login(req, res) {
             });
         }
 
-        const token = jwt.sign({ id: findUser.id }, process.env.JWT_SECRET, { expiresIn: '8h' });
+        const token = jwt.sign({ id: findUser.id,name:findUser.name,role:findUser.role }, process.env.JWT_SECRET, { expiresIn: '8h' });
 
         res.cookie("token", token, {
             httpOnly: true,
