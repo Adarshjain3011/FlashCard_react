@@ -6,32 +6,11 @@ import FlashCard from "./FlashCard";
 
 import axios from 'axios';
 
+import Signup from './Signup';
+
 function App() {
 
-  useEffect(()=>{
 
-    async function createUser() {
-      try{
-
-        const response = await axios.post('http://localhost:4000/api/create',{
-
-          name:"adarsh "
-        });
-
-        console.log(response);
-
-      }catch(error){
-
-        console.error(error);
-
-      }
-    }
-
-    createUser();
-
-  },[]);
-
- 
 
   return (
 
@@ -40,6 +19,8 @@ function App() {
       <Routes>
 
         <Route path='/flashcard' element={<FlashCard/>}></Route>
+
+        <Route path='/signup' element={<Signup/>}></Route>
 
       </Routes>
 

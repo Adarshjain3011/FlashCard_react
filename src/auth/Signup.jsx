@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 const Signup = () => {
 
-    const [formData, setFormData] = useState({ userName: "", email: "", password: "", role });
+    const [formData, setFormData] = useState({ userName: "", email: "", password: "", role:"student" });
 
     function changeHandler(e){
 
@@ -19,7 +19,16 @@ const Signup = () => {
 
             console.log("formdata is :",formData);
 
-            const reponse = await axios.post("")
+            const reponse = await axios.post("http://localhost:4000/api/signup",{
+
+                name:formData.userName,
+                email:formData.email,
+                password:formData.password,
+                role:formData.role,
+            })
+
+            console.log("resposne is ",reponse.data);
+
 
         }catch(erorr){
 
@@ -31,14 +40,14 @@ const Signup = () => {
     return (
         <div>
 
-            <form onSubmit={sumbitHandler}>
+            <form onSubmit={sumbitHandler} className='flex flex-col'>
 
                 <input
                     type="text"
                     placeholder="Username"
                     value={formData.userName}
                     name='userName'
-                    onChange={}
+                    onChange={changeHandler}
                 />
 
                 <input
@@ -46,6 +55,7 @@ const Signup = () => {
                     placeholder="Enter your email address"
                     value={formData.email}
                     name='email'
+                    onChange={changeHandler}
                 />
 
                 <input
@@ -53,7 +63,10 @@ const Signup = () => {
                     placeholder="Enter your password "
                     value={formData.password}
                     name='password'
+                    onChange={changeHandler}
                 />
+
+                <button type='submit'> Click me </button>
             </form>
         </div>
     )

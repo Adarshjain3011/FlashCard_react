@@ -5,6 +5,8 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const User = require('../models/user'); // Adjust the path as needed
 
+const bcrypt = require('bcrypt');
+
 async function signup(req, res) {
     try {
         const { name, email, password, role } = req.body;
